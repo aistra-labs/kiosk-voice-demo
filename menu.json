@@ -1,0 +1,335 @@
+{
+  "brand": {
+    "name": "Bunzo",
+    "tagline": "Stacked fresh. Served fast.",
+    "currency": "USD",
+    "price_note": "Prices include tax."
+  },
+  "categories": [
+    { "id": "burgers", "name": "Burgers", "icon": "hamburger" },
+    { "id": "chicken", "name": "Chicken & Dogs", "icon": "poultry_leg" },
+    { "id": "sides", "name": "Sides", "icon": "french_fries" },
+    { "id": "treats", "name": "Shakes & Treats", "icon": "soft_ice_cream" },
+    { "id": "drinks", "name": "Drinks", "icon": "cup_with_straw" }
+  ],
+  "combo": {
+    "regular": { "name": "Regular combo", "price": 3.49, "includes": "Medium Golden Fries and a regular Fountain Drink" },
+    "large": { "name": "Large combo", "price": 4.49, "includes": "Large Golden Fries and a large Fountain Drink" },
+    "drink_choice": "fountain_flavors"
+  },
+  "choice_sets": {
+    "fountain_flavors": {
+      "label": "Flavor",
+      "options": [
+        { "id": "cola", "name": "Bunzo Cola" },
+        { "id": "zero_cola", "name": "Zero Cola" },
+        { "id": "lemon_lime", "name": "Lemon-Lime" },
+        { "id": "orange_fizz", "name": "Orange Fizz" },
+        { "id": "root_beer", "name": "Root Beer" }
+      ]
+    },
+    "dips": {
+      "label": "Dip",
+      "options": [
+        { "id": "bbq", "name": "Smoky BBQ" },
+        { "id": "honey_mustard", "name": "Honey Mustard" },
+        { "id": "ranch", "name": "Ranch" },
+        { "id": "sweet_chili", "name": "Sweet Chili" },
+        { "id": "buffalo", "name": "Buffalo" }
+      ]
+    },
+    "shake_flavors": {
+      "label": "Flavor",
+      "options": [
+        { "id": "vanilla", "name": "Vanilla" },
+        { "id": "chocolate", "name": "Chocolate" },
+        { "id": "strawberry", "name": "Strawberry" },
+        { "id": "cookies_and_cream", "name": "Cookies & Cream" }
+      ]
+    },
+    "cone_flavors": {
+      "label": "Flavor",
+      "options": [
+        { "id": "vanilla", "name": "Vanilla" },
+        { "id": "chocolate", "name": "Chocolate" },
+        { "id": "swirl", "name": "Swirl" }
+      ]
+    },
+    "lemonade_flavors": {
+      "label": "Flavor",
+      "options": [
+        { "id": "classic", "name": "Classic" },
+        { "id": "strawberry", "name": "Strawberry" }
+      ]
+    }
+  },
+  "modifiers": {
+    "extra_cheese": { "name": "Extra cheese", "price": 0.80 },
+    "add_bacon": { "name": "Add bacon", "price": 1.50 },
+    "extra_patty": { "name": "Extra patty", "price": 2.00 },
+    "add_jalapenos": { "name": "Add jalapeños", "price": 0.50 },
+    "add_avocado": { "name": "Add avocado", "price": 1.00 },
+    "add_chili": { "name": "Add chili", "price": 0.99 },
+    "make_it_loaded": { "name": "Make it loaded", "price": 1.99 },
+    "extra_dip": { "name": "Extra dip", "price": 0.50 },
+    "cookie_crumble": { "name": "Cookie crumble", "price": 0.50 },
+    "no_onions": { "name": "No onions", "price": 0 },
+    "no_pickles": { "name": "No pickles", "price": 0 },
+    "no_tomato": { "name": "No tomato", "price": 0 },
+    "no_lettuce": { "name": "No lettuce", "price": 0 },
+    "no_cheese": { "name": "No cheese", "price": 0 },
+    "no_sauce": { "name": "No sauce", "price": 0 },
+    "no_whip": { "name": "No whipped cream", "price": 0 },
+    "light_ice": { "name": "Light ice", "price": 0 },
+    "no_ice": { "name": "No ice", "price": 0 }
+  },
+  "items": [
+    {
+      "id": "classic",
+      "category": "burgers",
+      "name": "Bunzo Classic",
+      "description": "Flame-grilled beef patty, cheddar, lettuce, tomato, pickles and Bunzo sauce on a toasted brioche bun.",
+      "icon": "hamburger",
+      "accent": null,
+      "price": 5.49,
+      "calories": 590,
+      "combo": true,
+      "modifiers": ["extra_cheese", "add_bacon", "extra_patty", "add_jalapenos", "no_onions", "no_pickles", "no_tomato", "no_lettuce", "no_cheese", "no_sauce"],
+      "tags": []
+    },
+    {
+      "id": "double_stack",
+      "category": "burgers",
+      "name": "Double Stack",
+      "description": "Two smashed beef patties, double cheddar, grilled onions, pickles and Bunzo sauce.",
+      "icon": "hamburger",
+      "accent": "cheese_wedge",
+      "price": 7.29,
+      "calories": 860,
+      "combo": true,
+      "modifiers": ["extra_cheese", "add_bacon", "extra_patty", "add_jalapenos", "no_onions", "no_pickles", "no_tomato", "no_lettuce", "no_cheese", "no_sauce"],
+      "tags": ["favorite"]
+    },
+    {
+      "id": "smokehouse_bbq",
+      "category": "burgers",
+      "name": "Smokehouse BBQ Bacon",
+      "description": "Beef patty, smoked bacon, crispy onion rings, cheddar and smoky BBQ sauce.",
+      "icon": "hamburger",
+      "accent": "bacon",
+      "price": 7.99,
+      "calories": 920,
+      "combo": true,
+      "modifiers": ["extra_cheese", "extra_patty", "add_jalapenos", "no_onions", "no_cheese", "no_sauce"],
+      "tags": []
+    },
+    {
+      "id": "crispy_chicken",
+      "category": "burgers",
+      "name": "Crispy Chicken Sandwich",
+      "description": "Buttermilk fried chicken breast, shredded lettuce, pickles and creamy mayo.",
+      "icon": "hamburger",
+      "accent": "poultry_leg",
+      "price": 6.49,
+      "calories": 680,
+      "combo": true,
+      "modifiers": ["extra_cheese", "add_bacon", "add_jalapenos", "add_avocado", "no_pickles", "no_lettuce", "no_sauce"],
+      "tags": []
+    },
+    {
+      "id": "firecracker_chicken",
+      "category": "burgers",
+      "name": "Firecracker Chicken",
+      "description": "Spicy fried chicken, jalapeños, pepper jack and chipotle mayo. It bites back.",
+      "icon": "hamburger",
+      "accent": "hot_pepper",
+      "price": 6.79,
+      "calories": 720,
+      "combo": true,
+      "modifiers": ["extra_cheese", "add_bacon", "add_avocado", "no_cheese", "no_lettuce", "no_sauce"],
+      "tags": ["favorite", "spicy"]
+    },
+    {
+      "id": "garden_veggie",
+      "category": "burgers",
+      "name": "Garden Veggie Burger",
+      "description": "Plant-based patty, lettuce, tomato, red onion and avocado spread.",
+      "icon": "hamburger",
+      "accent": "leafy_green",
+      "price": 6.29,
+      "calories": 540,
+      "combo": true,
+      "modifiers": ["extra_cheese", "add_avocado", "add_jalapenos", "no_onions", "no_tomato", "no_lettuce", "no_sauce"],
+      "tags": ["veggie"]
+    },
+    {
+      "id": "chicken_bites",
+      "category": "chicken",
+      "name": "Chicken Bites",
+      "description": "Golden, juicy all-white-meat bites with a dip of your choice.",
+      "icon": "poultry_leg",
+      "accent": null,
+      "sizes": [
+        { "id": "6_piece", "name": "6 piece", "price": 4.99 },
+        { "id": "9_piece", "name": "9 piece", "price": 6.49 },
+        { "id": "12_piece", "name": "12 piece", "price": 7.99 }
+      ],
+      "choice": "dips",
+      "calories": 290,
+      "combo": true,
+      "modifiers": ["extra_dip"],
+      "tags": []
+    },
+    {
+      "id": "bunzo_dog",
+      "category": "chicken",
+      "name": "Bunzo Dog",
+      "description": "All-beef hot dog in a toasted bun with mustard, ketchup and relish.",
+      "icon": "hot_dog",
+      "accent": null,
+      "price": 3.99,
+      "calories": 420,
+      "combo": true,
+      "modifiers": ["add_chili", "extra_cheese", "no_onions"],
+      "tags": []
+    },
+    {
+      "id": "fries",
+      "category": "sides",
+      "name": "Golden Fries",
+      "description": "Crispy outside, fluffy inside, salted just right.",
+      "icon": "french_fries",
+      "accent": null,
+      "sizes": [
+        { "id": "small", "name": "Small", "price": 2.29 },
+        { "id": "medium", "name": "Medium", "price": 2.99 },
+        { "id": "large", "name": "Large", "price": 3.59 }
+      ],
+      "calories": 320,
+      "combo": false,
+      "modifiers": ["make_it_loaded", "extra_dip"],
+      "tags": ["favorite"]
+    },
+    {
+      "id": "onion_rings",
+      "category": "sides",
+      "name": "Onion Rings",
+      "description": "Thick-cut sweet onions in a crunchy golden batter.",
+      "icon": "onion",
+      "accent": null,
+      "sizes": [
+        { "id": "regular", "name": "Regular", "price": 3.29 },
+        { "id": "large", "name": "Large", "price": 4.29 }
+      ],
+      "calories": 410,
+      "combo": false,
+      "modifiers": ["extra_dip"],
+      "tags": []
+    },
+    {
+      "id": "shake",
+      "category": "treats",
+      "name": "Hand-Spun Shake",
+      "description": "Thick, creamy and hand-spun, topped with whipped cream.",
+      "icon": "glass_of_milk",
+      "accent": null,
+      "sizes": [
+        { "id": "regular", "name": "Regular", "price": 3.99 },
+        { "id": "large", "name": "Large", "price": 4.99 }
+      ],
+      "choice": "shake_flavors",
+      "calories": 560,
+      "combo": false,
+      "modifiers": ["cookie_crumble", "no_whip"],
+      "tags": ["favorite"]
+    },
+    {
+      "id": "soft_serve",
+      "category": "treats",
+      "name": "Soft-Serve Cone",
+      "description": "Silky soft-serve in a crisp waffle cone.",
+      "icon": "soft_ice_cream",
+      "accent": null,
+      "price": 1.79,
+      "choice": "cone_flavors",
+      "calories": 230,
+      "combo": false,
+      "modifiers": [],
+      "tags": []
+    },
+    {
+      "id": "apple_pie",
+      "category": "treats",
+      "name": "Warm Apple Pie",
+      "description": "Flaky golden crust with cinnamon apple filling, served warm.",
+      "icon": "pie",
+      "accent": null,
+      "price": 1.99,
+      "calories": 250,
+      "combo": false,
+      "modifiers": [],
+      "tags": []
+    },
+    {
+      "id": "cookie",
+      "category": "treats",
+      "name": "Choc Chip Cookie",
+      "description": "Soft-baked with big chocolate chunks.",
+      "icon": "cookie",
+      "accent": null,
+      "price": 1.29,
+      "calories": 210,
+      "combo": false,
+      "modifiers": [],
+      "tags": []
+    },
+    {
+      "id": "fountain_drink",
+      "category": "drinks",
+      "name": "Fountain Drink",
+      "description": "Ice-cold and bubbly. Bunzo Cola, Zero Cola, Lemon-Lime, Orange Fizz or Root Beer.",
+      "icon": "cup_with_straw",
+      "accent": null,
+      "sizes": [
+        { "id": "kids", "name": "Kids", "price": 1.49 },
+        { "id": "regular", "name": "Regular", "price": 1.99 },
+        { "id": "large", "name": "Large", "price": 2.49 }
+      ],
+      "choice": "fountain_flavors",
+      "calories": 210,
+      "combo": false,
+      "modifiers": ["light_ice", "no_ice"],
+      "tags": ["favorite"]
+    },
+    {
+      "id": "lemonade",
+      "category": "drinks",
+      "name": "Fresh Lemonade",
+      "description": "Squeezed fresh every morning. Classic or strawberry.",
+      "icon": "cup_with_straw",
+      "accent": "lemon",
+      "sizes": [
+        { "id": "regular", "name": "Regular", "price": 2.49 },
+        { "id": "large", "name": "Large", "price": 2.99 }
+      ],
+      "choice": "lemonade_flavors",
+      "calories": 180,
+      "combo": false,
+      "modifiers": ["light_ice", "no_ice"],
+      "tags": []
+    },
+    {
+      "id": "water",
+      "category": "drinks",
+      "name": "Bottled Water",
+      "description": "Still spring water, chilled.",
+      "icon": "droplet",
+      "accent": null,
+      "price": 1.49,
+      "calories": 0,
+      "combo": false,
+      "modifiers": [],
+      "tags": []
+    }
+  ]
+}

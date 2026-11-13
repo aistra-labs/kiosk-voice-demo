@@ -1,0 +1,1 @@
+{"status":"ok","screen":"item shown","item":{"id":"fountain_drink","name":"Fountain Drink","category":"drinks","sizes":{"kids":1.49,"regular":1.99,"large":2.49},"choice":{"label":"Flavor","options":["cola","zero_cola","lemon_lime","orange_fizz","root_beer"]},"modifiers":{"light_ice":0,"no_ice":0},"combo_available":false}}
