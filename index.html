@@ -44,23 +44,25 @@
   <main class="stage" id="main">
     <!-- Attract screen -->
     <section class="attract" data-screen="attract" aria-labelledby="attract-title">
-      <div class="hero-foods" aria-hidden="true">
-        <img class="hero-food hero-food--1" src="assets/img/food/french_fries.png" alt="">
-        <img class="hero-food hero-food--2" src="assets/img/food/hot_dog.png" alt="">
-        <img class="hero-food hero-food--3" src="assets/img/food/hamburger.png" alt="">
-        <img class="hero-food hero-food--4" src="assets/img/food/soft_ice_cream.png" alt="">
-        <img class="hero-food hero-food--5" src="assets/img/food/cup_with_straw.png" alt="">
+      <div class="attract__inner" data-attract-inner>
+        <div class="hero-foods" aria-hidden="true">
+          <img class="hero-food hero-food--1" src="assets/img/food/french_fries.png" alt="">
+          <img class="hero-food hero-food--2" src="assets/img/food/hot_dog.png" alt="">
+          <img class="hero-food hero-food--3" src="assets/img/food/hamburger.png" alt="">
+          <img class="hero-food hero-food--4" src="assets/img/food/soft_ice_cream.png" alt="">
+          <img class="hero-food hero-food--5" src="assets/img/food/cup_with_straw.png" alt="">
+        </div>
+        <h1 id="attract-title" class="attract__title" data-split>What are you <span class="hl">craving?</span></h1>
+        <p class="attract__sub" data-intro>Just say it. Burgers, fries, shakes and more, made your way.</p>
+        <button class="cta" type="button" data-start data-intro>
+          <span class="cta__orb" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span class="cta__label" data-start-label>Tap to start your order</span>
+        </button>
+        <p class="attract__hint" data-intro>Try <q data-hint>A Double Stack combo with a large Zero Cola</q></p>
+        <p class="favs__label" data-intro>Fan favourites</p>
+        <div class="favs" data-favs></div>
+        <p class="attract__status" data-attract-status role="status" aria-live="polite"></p>
       </div>
-      <h1 id="attract-title" class="attract__title" data-split>What are you <span class="hl">craving?</span></h1>
-      <p class="attract__sub" data-intro>Just say it. Burgers, fries, shakes and more, made your way.</p>
-      <button class="cta" type="button" data-start data-intro>
-        <span class="cta__orb" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-        <span class="cta__label" data-start-label>Tap to start your order</span>
-      </button>
-      <p class="attract__hint" data-intro>Try <q data-hint>A Double Stack combo with a large Zero Cola</q></p>
-      <p class="favs__label" data-intro>Fan favourites</p>
-      <div class="favs" data-favs></div>
-      <p class="attract__status" data-attract-status role="status" aria-live="polite"></p>
     </section>
 
     <!-- Live order -->

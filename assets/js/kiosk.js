@@ -59,7 +59,7 @@
   const el = {
     screens: { attract: $('[data-screen="attract"]'), live: $('[data-screen="live"]'), placed: $('[data-screen="placed"]') },
     panels: { hello: $('[data-panel="hello"]'), item: $('[data-panel="item"]'), menu: $('[data-panel="menu"]') },
-    start: $('[data-start]'), startLabel: $('[data-start-label]'), hint: $('[data-hint]'), favs: $('[data-favs]'),
+    attractInner: $('[data-attract-inner]'), start: $('[data-start]'), startLabel: $('[data-start-label]'), hint: $('[data-hint]'), favs: $('[data-favs]'),
     attractStatus: $('[data-attract-status]'),
     bag: $('[data-bag]'), bagCount: $('[data-bag-count]'), bagTotal: $('[data-bag-total]'),
     order: $('[data-order]'), orderToggle: $('[data-order-toggle]'), orderCount: $('[data-order-count]'),
@@ -602,7 +602,7 @@
     rollNumber(number);
     if (gsapOk()) {
       gsap.fromTo('.placed__check', { scale: 0, rotate: -40 }, { scale: 1, rotate: 0, duration: 0.8, ease: 'back.out(2.2)', delay: 0.2 });
-      gsap.from(['.placed__title', '.placed__label', '.placed__card', '.placed__pay', '[data-new-order]'], { y: 20, opacity: 0, duration: 0.5, stagger: 0.08, delay: 0.35, ease: 'power3.out' });
+      gsap.from(['.placed__title', '.placed__label', '.placed__card', '.placed__pay', '[data-new-order]'], { y: 20, opacity: 0, duration: 0.5, stagger: 0.08, delay: 0.35, ease: 'power3.out', clearProps: 'transform' });
       confetti();
     }
   }
@@ -662,6 +662,7 @@
     el.confetti.innerHTML = '';
     setPhase('idle');
     switchScreen('attract');
+    fitAttract();
   }
   function countdown(seconds, onDone, label) {
     clearInterval(state.resetTimer);
@@ -895,6 +896,21 @@
     $$('[data-trace-toggle]').forEach((b) => b.setAttribute('aria-expanded', String(open)));
     if (open && gsapOk()) gsap.fromTo(el.trace, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: 'power3.out' });
   }
+  // Scale the start screen down on short windows so it never runs under the top bar or the dock.
+  // Phones scroll instead. The extra room covers the floating food icons and breathing space.
+  function fitAttract() {
+    const inner = el.attractInner;
+    inner.style.transform = '';
+    if (el.screens.attract.hidden || window.matchMedia('(max-width: 700px)').matches) return;
+    const box = el.screens.attract;
+    const style = getComputedStyle(box);
+    const room = box.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+    const scale = Math.min(1, room / (inner.offsetHeight + 32));
+    if (scale < 0.995) inner.style.transform = `scale(${scale.toFixed(3)})`;
+  }
+  let fitFrame = 0;
+  const queueFit = () => { cancelAnimationFrame(fitFrame); fitFrame = requestAnimationFrame(fitAttract); };
+
   function rotateHints() {
     let i = 0;
     setInterval(() => {
@@ -920,7 +936,7 @@
     } else {
       tl.from(title, { y: 30, opacity: 0, duration: 0.6 }, 0.25);
     }
-    tl.from($$('[data-intro]'), { y: 18, opacity: 0, duration: 0.5, stagger: 0.07 }, 0.55);
+    tl.from($$('[data-intro]'), { y: 18, opacity: 0, duration: 0.5, stagger: 0.07, clearProps: 'transform' }, 0.55);
     tl.from($$('.fav'), { y: 30, opacity: 0, scale: 0.92, duration: 0.5, stagger: 0.06, ease: 'back.out(1.6)' }, 0.75);
     foods.forEach((food, i) => {
       gsap.to(food, { y: gsap.utils.random(-14, -6), rotate: gsap.utils.random(-6, 6), duration: gsap.utils.random(1.8, 2.6), repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1 + i * 0.15 });
@@ -984,6 +1000,9 @@
       return;
     }
     renderFavourites();
+    fitAttract();
+    window.addEventListener('resize', queueFit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueFit);
     intro();
     rotateHints();
     loadWidget();

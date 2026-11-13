@@ -83,7 +83,7 @@ button:disabled { cursor: default; }
   display: inline-flex; align-items: center; gap: 10px;
   min-height: 46px; padding: 0 20px; border-radius: 999px; border: 0;
   font-weight: 700; font-size: 15px; white-space: nowrap;
-  transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background-color .2s;
+  transition: box-shadow .2s var(--ease-out), background-color .2s;
 }
 .pill:active { transform: scale(.97); }
 .pill--ghost { background: rgba(255, 255, 255, .85); box-shadow: var(--shadow-sm); }
@@ -98,9 +98,10 @@ button:disabled { cursor: default; }
 .attract, .live, .placed { position: absolute; inset: 0; }
 
 /* Attract */
-.attract {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 0 var(--gutter) 8px; gap: clamp(8px, 1.4vh, 16px);
+.attract { display: flex; align-items: center; justify-content: center; padding: 0 var(--gutter) 8px; }
+.attract__inner {
+  display: flex; flex-direction: column; align-items: center; width: 100%;
+  text-align: center; gap: clamp(8px, 1.4vh, 16px); transform-origin: 50% 50%;
 }
 .hero-foods { display: flex; align-items: flex-end; justify-content: center; gap: clamp(8px, 2vw, 28px); margin-bottom: 4px; }
 .hero-food { width: clamp(56px, 6.4vw, 92px); height: auto; filter: drop-shadow(0 16px 14px rgba(110, 45, 10, .22)); will-change: transform; }
@@ -123,11 +124,12 @@ button:disabled { cursor: default; }
 
 .cta {
   position: relative; display: inline-flex; align-items: center; gap: 16px;
-  margin-top: clamp(4px, 1vh, 12px);
+  /* The pulse ring reaches about 14px past the button: the margins plus the gap keep it off the text. */
+  margin: clamp(8px, 1.4vh, 14px) 0 clamp(6px, 1vh, 10px);
   padding: 12px 34px 12px 12px; border: 0; border-radius: 999px;
   background: var(--ketchup); color: #fff; box-shadow: var(--shadow-red);
   font-family: var(--font-display); font-weight: 700; font-size: clamp(19px, 1.8vw, 26px); letter-spacing: -0.01em;
-  transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out), background-color .2s;
+  transition: box-shadow .25s var(--ease-out), background-color .2s;
 }
 .cta::before {
   content: ""; position: absolute; inset: -8px; border-radius: inherit; border: 2px solid rgba(229, 53, 43, .35);
@@ -416,6 +418,11 @@ body[data-phase="connecting"] .orb-btn { animation: pulse 1s ease-in-out infinit
   .dock__caption [data-caption-text] { -webkit-line-clamp: 1; }
 }
 
+@media (max-height: 680px) and (min-width: 701px) {
+  /* Very short windows: keep the headline and the start button large; the Menu button still opens the menu. */
+  .favs__label, .favs { display: none; }
+}
+
 @media (max-width: 1000px), (max-aspect-ratio: 4/5) {
   .live { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
   .order { max-height: 64px; transition: max-height .4s var(--ease-out); border-radius: 22px; }
@@ -432,7 +439,7 @@ body[data-phase="connecting"] .orb-btn { animation: pulse 1s ease-in-out infinit
 
 @media (max-aspect-ratio: 4/5) and (min-width: 701px) {
   /* Portrait kiosk screen */
-  .attract { gap: clamp(18px, 2.2vh, 34px); }
+  .attract__inner { gap: clamp(18px, 2.2vh, 34px); }
   .hero-food { width: 12vw; } .hero-food--2, .hero-food--4 { width: 14vw; } .hero-food--3 { width: 21vw; }
   .attract__title { font-size: clamp(56px, 10vw, 130px); }
   .attract__sub { font-size: clamp(18px, 2.6vw, 30px); }
@@ -464,7 +471,7 @@ body[data-phase="connecting"] .orb-btn { animation: pulse 1s ease-in-out infinit
   .logo__icon { width: 36px; height: 36px; }
   .pill { min-height: 40px; padding: 0 14px; font-size: 14px; }
   .pill__count { display: none; }
-  .attract { position: relative; inset: auto; justify-content: flex-start; padding-top: 12px; padding-bottom: 20px; }
+  .attract { position: relative; inset: auto; display: block; padding-top: 12px; padding-bottom: 20px; }
   .stage { overflow: auto; }
   .favs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
   .fav { width: auto; }
