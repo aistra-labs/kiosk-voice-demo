@@ -1,3 +1,177 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Bunzo voice kiosk | Aistra</title></head>
-<body style="font-family:system-ui;background:#FFF6E8;color:#2A1A12;display:grid;place-items:center;min-height:100vh;margin:0"><p>The Bunzo voice kiosk demo is being set up.</p></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bunzo Voice Kiosk | Aistra</title>
+  <meta name="description" content="Order at Bunzo by voice. A live demo of a voice ordering kiosk built by Aistra on DeepTalk.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FFF6E8">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+  <link rel="stylesheet" href="assets/css/kiosk.css">
+  <script>
+    // Hide intro targets only when motion is allowed; kiosk.js reveals them.
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
+  </script>
+</head>
+<body data-phase="loading">
+  <div class="bg" aria-hidden="true">
+    <span class="blob blob--a"></span>
+    <span class="blob blob--b"></span>
+    <span class="blob blob--c"></span>
+    <span class="grain"></span>
+  </div>
+
+  <header class="topbar">
+    <a class="logo" href="./" aria-label="Bunzo, start over">
+      <img class="logo__icon" src="assets/img/food/hamburger.png" alt="" width="44" height="44">
+      <span class="logo__word">bunzo</span>
+    </a>
+    <div class="topbar__right">
+      <button class="pill pill--ghost" type="button" data-open-menu>Menu</button>
+      <button class="pill pill--bag" type="button" data-bag hidden>
+        <span class="pill__count" data-bag-count>0 items</span>
+        <span class="pill__total" data-bag-total>$0.00</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="stage" id="main">
+    <!-- Attract screen -->
+    <section class="attract" data-screen="attract" aria-labelledby="attract-title">
+      <div class="hero-foods" aria-hidden="true">
+        <img class="hero-food hero-food--1" src="assets/img/food/french_fries.png" alt="">
+        <img class="hero-food hero-food--2" src="assets/img/food/hot_dog.png" alt="">
+        <img class="hero-food hero-food--3" src="assets/img/food/hamburger.png" alt="">
+        <img class="hero-food hero-food--4" src="assets/img/food/soft_ice_cream.png" alt="">
+        <img class="hero-food hero-food--5" src="assets/img/food/cup_with_straw.png" alt="">
+      </div>
+      <h1 id="attract-title" class="attract__title" data-split>What are you <span class="hl">craving?</span></h1>
+      <p class="attract__sub" data-intro>Just say it. Burgers, fries, shakes and more, made your way.</p>
+      <button class="cta" type="button" data-start data-intro>
+        <span class="cta__orb" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="cta__label" data-start-label>Tap to start your order</span>
+      </button>
+      <p class="attract__hint" data-intro>Try <q data-hint>A Double Stack combo with a large Zero Cola</q></p>
+      <p class="favs__label" data-intro>Fan favourites</p>
+      <div class="favs" data-favs></div>
+      <p class="attract__status" data-attract-status role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Live order -->
+    <section class="live" data-screen="live" aria-label="Your order in progress" hidden>
+      <div class="live__main">
+        <div class="panel panel--hello" data-panel="hello">
+          <div class="hello__orb" aria-hidden="true"><img src="assets/img/food/waving_hand.png" alt=""></div>
+          <h2 class="hello__title">I'm listening.</h2>
+          <p class="hello__sub">Tell me what you'd like. I'll put it on the screen as you go.</p>
+          <ul class="hello__ideas" aria-label="Ideas">
+            <li>"Two Bunzo Classics and a large fries"</li>
+            <li>"What shakes do you have?"</li>
+            <li>"A Firecracker combo with a Zero Cola"</li>
+          </ul>
+        </div>
+        <div class="panel panel--item" data-panel="item" hidden></div>
+        <div class="panel panel--menu" data-panel="menu" hidden></div>
+      </div>
+
+      <aside class="order" aria-label="Your order" data-order>
+        <button class="order__head" type="button" data-order-toggle aria-expanded="false">
+          <span class="order__title">Your order</span>
+          <span class="order__count" data-order-count>0 items</span>
+          <span class="order__chev" aria-hidden="true"></span>
+        </button>
+        <div class="order__body">
+          <p class="order__empty" data-order-empty>Your items show up here as you speak.</p>
+          <ol class="order__lines" data-order-lines></ol>
+        </div>
+        <footer class="order__foot">
+          <div class="order__total-row">
+            <span>Total</span>
+            <strong class="order__total" data-order-total>$0.00</strong>
+          </div>
+          <p class="order__note" data-order-note>Prices include tax.</p>
+        </footer>
+      </aside>
+    </section>
+
+    <!-- Order placed -->
+    <section class="placed" data-screen="placed" aria-labelledby="placed-title" hidden>
+      <div class="confetti" data-confetti aria-hidden="true"></div>
+      <div class="placed__hero">
+        <img class="placed__check" src="assets/img/food/check_mark_button.png" alt="" width="132" height="132">
+        <h2 id="placed-title" class="placed__title">Order placed!</h2>
+        <p class="placed__label">Your order number</p>
+        <p class="placed__number" data-order-number>B-000</p>
+      </div>
+      <div class="placed__receipt">
+        <div class="placed__card">
+          <ol class="placed__lines" data-placed-lines></ol>
+          <div class="placed__total"><span>Total</span><strong data-placed-total>$0.00</strong></div>
+        </div>
+        <p class="placed__pay">Please pay at the counter. Your food will be ready in about 6 minutes.</p>
+        <button class="pill pill--solid" type="button" data-new-order>
+          Start a new order <span class="placed__count" data-reset-count></span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dock" data-dock>
+    <p class="dock__caption" data-caption aria-live="polite"><span class="dock__who">Bunzo</span><span data-caption-text>Hi! Tap the button and tell me what you'd like.</span></p>
+    <div class="dock__bar">
+      <p class="dock__transcript" data-transcript><span class="dock__placeholder" data-transcript-placeholder>Say your order out loud</span><span data-transcript-text></span></p>
+      <span class="chip chip--latency" data-latency hidden title="Voice to voice: from the end of your speech to the first sound of the reply"><span class="chip__dot"></span><span data-latency-text>0.0 s</span></span>
+      <button class="chip chip--sound" type="button" data-sound aria-pressed="true">Sound on</button>
+      <button class="orb-btn" type="button" data-orb aria-label="Start your order">
+        <span class="orb-btn__ring" aria-hidden="true"></span>
+        <span class="orb-btn__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      </button>
+    </div>
+    <div class="dock__meta">
+      <button class="trace-toggle" type="button" data-trace-toggle aria-expanded="false" aria-controls="trace">Under the hood</button>
+      <a class="powered" href="https://www.aistra.com" target="_blank" rel="noopener">
+        <span>Voice AI by</span><img src="assets/img/aistra-logo.png" alt="Aistra" width="1044" height="389"><span>on DeepTalk</span>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Full menu, opened by touch -->
+  <div class="sheet" data-sheet hidden>
+    <div class="sheet__scrim" data-close-menu></div>
+    <div class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <header class="sheet__head">
+        <h2 id="sheet-title">The Bunzo menu</h2>
+        <button class="pill pill--ghost" type="button" data-close-menu>Close</button>
+      </header>
+      <nav class="sheet__tabs" data-sheet-tabs aria-label="Menu categories"></nav>
+      <div class="sheet__grid" data-sheet-grid></div>
+      <p class="sheet__note">Prices in US dollars, tax included. Ask by voice to add anything to your order.</p>
+    </div>
+  </div>
+
+  <!-- Live event feed for technical audiences -->
+  <aside class="trace" id="trace" data-trace aria-label="Live call events" hidden>
+    <header class="trace__head">
+      <strong>Under the hood</strong>
+      <span>Live events from the DeepTalk call</span>
+      <button class="trace__close" type="button" data-trace-toggle aria-label="Close">Close</button>
+    </header>
+    <ol class="trace__list" data-trace-list></ol>
+  </aside>
+
+  <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+
+  <!-- The DeepTalk widget runs headlessly in here. -->
+  <div class="dt-hidden" aria-hidden="true"><div id="deeptalk-inline-container"></div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="assets/js/kiosk.js" defer></script>
+</body>
+</html>
